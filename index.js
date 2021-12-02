@@ -31,7 +31,7 @@ const server = http.createServer(function(req, res){
   if(needRedirectDomains[req.headers.host]){
     res.writeHead(301, {
       'Cache-control': redirectMaxAge,
-      Location: 'https://' + homeHttpsDomain + req.url
+      Location: 'https://' + homeHttpsDomain
     });
     res.end('');
     return;
