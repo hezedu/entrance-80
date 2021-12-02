@@ -14,17 +14,31 @@ const server = http.createServer(function(req, res){
   if(letsencrypt(req, res)){
     return;
   }
+
+  if(req.url === '/favicon.ico'){
+    res.set({
+      'Cache-Control': 'public, max-age=91104000'
+    });
+    res.status(410).end('Gone');
+    return;
+  }
+
+  if(routes[req.url]){
+    routes[req.url](req, res);
+    return;
+  }
+
   if(needRedirectDomains[req.headers.host]){
     res.writeHead(301, {
       'Cache-control': redirectMaxAge,
       Location: 'https://' + homeHttpsDomain + req.url
     });
     res.end('');
-  } else if(routes[req.url]){
-    routes[req.url](req, res);
-  } else {
-    res.statusCode = 404;
-    res.end('Not found');
+    return;
+  }
+
+  res.statusCode = 404;
+  res.end('Not found');
   }
 });
 
