@@ -1,7 +1,7 @@
 const http = require('http');
 
 
-const {httpsRedirectDomains} = require('./config.js');
+const {needRedirectDomains, homeHttpsDomain} = require('./config.js');
 const letsencrypt = require('./lib/letsencrypt-gen-cert.js');
 const routes = require('./routes/index.js');
 
@@ -14,10 +14,10 @@ const server = http.createServer(function(req, res){
   if(letsencrypt(req, res)){
     return;
   }
-  if(httpsRedirectDomains[req.headers.host]){
+  if(needRedirectDomains[req.headers.host]){
     res.writeHead(301, {
       'Cache-control': redirectMaxAge,
-      Location: 'https://' + req.headers.host + req.url
+      Location: 'https://' + homeHttpsDomain + req.url
     });
     res.end('');
   } else if(routes[req.url]){
