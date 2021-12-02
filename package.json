@@ -8,7 +8,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "pro": "NODE_ENV=production node /opt/entrance-80/index.js &"
+    "pro": "NODE_ENV=production node /opt/entrance-80/index.js &",
+    "showPid": "ps axo pid,cmd U root | grep /opt/entrance-80/index.js$"
   },
   "repository": {
     "type": "git",
