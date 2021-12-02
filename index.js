@@ -16,10 +16,10 @@ const server = http.createServer(function(req, res){
   }
 
   if(req.url === '/favicon.ico'){
-    res.set({
-      'Cache-Control': 'public, max-age=91104000'
+    res.writeHead(410, {
+      'Cache-control': 'public, max-age=91104000'
     });
-    res.status(410).end('Gone');
+    res.end('Gone');
     return;
   }
 
