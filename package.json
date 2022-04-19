@@ -9,7 +9,7 @@
   },
   "scripts": {
     "pro": "NODE_ENV=production node /opt/entrance-80/index.js 2>>/tmp/entrance-80-err.log &",
-    "showPid": "ps axo pid,cmd U root | grep /opt/entrance-80/index.js 2>>/tmp/entrance-80-err.log &$"
+    "showPid": "ps axo pid,cmd U root | grep /opt/entrance-80/index.js$"
   },
   "repository": {
     "type": "git",
